@@ -11,7 +11,7 @@ body:
       label: バグを報告する前に - 確認事項
       description: バグを報告する前に確認する事項です。
       options:
-        - label: [同一Issue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
+        - label: すでに[同じバグを報告するIssue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
           required: true
         - label: 脆弱性の報告ではありませんか？脆弱性の報告は別の窓口から行ってください。
           required: true
