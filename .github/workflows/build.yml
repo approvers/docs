@@ -19,3 +19,5 @@ jobs:
         run: yarn install --immutable
       - name: build docs.approvers.dev
         run: yarn run build
+      - name: export docs.apprvers.dev
+        run: yarn run export
