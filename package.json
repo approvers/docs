@@ -10,6 +10,7 @@
     "lint": "next lint",
     "format": "prettier --ignore-path .gitignore -w **/*.{js,ts,jsx,tsx,md,mdx}"
   },
+  "packageManager": "pnpm@7.27.0",
   "dependencies": {
     "next": "13.1.6",
     "nextra": "^2.2.14",
