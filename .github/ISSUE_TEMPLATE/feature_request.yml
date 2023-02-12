@@ -1,0 +1,33 @@
+name: 機能要望
+description: 新機能等追加のリクエストを提出します。
+labels: ["C-enhancement"]
+body:
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: リクエストを提出する前に - 確認事項
+      description: リクエストを提出する前に確認する事項です。
+      options:
+        - label: [同一Issue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 機能の説明
+      description: >
+        追加してほしい機能を説明してください。明確にするのが大切です。
+    validations:
+      required: true
+  - type: textarea
+    id: possible-solutions
+    attributes:
+      label: 理由
+      description: >
+        追加してほしい理由を説明してください。明確にするのが大切です。
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 追加情報
+      description: 追加でコントリビューターに説明したい情報を記述します。

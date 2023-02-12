@@ -1,0 +1,57 @@
+name: バグ報告
+description: サイト内での不具合を報告します。
+labels: ["C-bug"]
+body:
+  - type: markdown
+    attributes:
+      value: docs.approvers.dev へのバグ報告ありがとうございます。
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: バグを報告する前に - 確認事項
+      description: バグを報告する前に確認する事項です。
+      options:
+        - label: [同一Issue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
+          required: true
+        - label: 脆弱性の報告ではありませんか？脆弱性の報告は別の窓口から行ってください。
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: バグの説明
+      description: >
+        サイト内で見つけたバグを説明してください。何が起きたのか明確にするのが大切です。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現方法
+      description: バグの再現方法を説明してください。
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: possible-solutions
+    attributes:
+      label: 期待される動作
+      description: >
+        この不具合が発生していなかったときの期待される動作を説明してください。
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 追加情報
+      description: 追加でコントリビューターに説明したい情報を記述します。
+  - type: textarea
+    id: version
+    attributes:
+      label: ブラウザとバージョン
+      description: 使用しているブラウザとそのバージョンを説明します。(Google Chromeの場合は設定から確認できます)
+      render: Text
+    validations:
+      required: true

@@ -1,0 +1,47 @@
+# docs.approvers.dev ラベルファイル
+# ラベル等の編集はこのファイルを編集してください。 main ブランチ更新後 CI が動き出し同期を開始します。
+
+# C - Category
+- name: 'C-bug'
+  description: 'Category: bug'
+  color: '8ec1f5'
+- name: 'C-security'
+  description: 'Category: security'
+  color: '8ec1f5'
+- name: 'C-enhancement'
+  description: 'Category: enhancement'
+  color: '8ec1f5'
+- name: 'C-cleanup'
+  description: 'Category: cleanup within codebase'
+  color: '8ec1f5'
+- name: 'C-GitHub Actions'
+  description: 'Category: GitHub Actions'
+  color: '8ec1f5'
+- name: 'C-improvement'
+  description: 'Category: improvement'
+  color: '8ec1f5'
+- name: 'C-development'
+  description: 'Category: development'
+  color: '8ec1f5'
+- name: 'C-context'
+  description: 'Category: context'
+  color: '8ec1f5'
+
+# P - Priority
+- name: 'P-high'
+  description: 'Priority: High'
+  color: 'f79d6d'
+
+# R - Renovate
+
+- name: 'R-Update(gh-actions)'
+  description: 'Renovate: update workflow'
+  color: '4d68b3'
+- name: 'R-Update(npm)'
+  description: 'Renovate: update npm'
+  color: '4d68b3'
+
+- name: 'Help wanted'
+  color: 'ab7aeb'
+- name: 'good first issue'
+  color: 'ab7aeb'
