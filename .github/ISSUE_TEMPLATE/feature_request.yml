@@ -8,7 +8,7 @@ body:
       label: リクエストを提出する前に - 確認事項
       description: リクエストを提出する前に確認する事項です。
       options:
-        - label: [同一Issue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
+        - label: すでに[同じ要望のIssue](https://github.com/approvers/docs/issues?q=)はないか確認しましたか？
           required: true
   - type: textarea
     id: description
