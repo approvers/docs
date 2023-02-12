@@ -9,5 +9,8 @@ const withNextra = require('nextra')({
 module.exports = withNextra({
   // next.js のコンフィグ
   reactStrictMode: true,
-  distDir: 'build'
+  distDir: 'build',
+  images: {
+    unoptimized: true
+  }
 });
