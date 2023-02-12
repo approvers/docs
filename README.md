@@ -8,6 +8,6 @@
 git clone https://github.com/approvers/docs.git
 cd docs
 yarn
-yarn build 
+yarn build
 yarn start
 ```
