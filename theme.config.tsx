@@ -21,7 +21,7 @@ export default {
     next: true
   },
   feedback: {
-    content: 'issueを提出する',
+    content: 'Issueを提出する',
     useLink() {
       return `${URL}/issues/new`;
     }
