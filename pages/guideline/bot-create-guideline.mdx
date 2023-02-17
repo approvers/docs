@@ -53,7 +53,20 @@ Discord ではクライアント上でも **この権限を付与する際は慎
 
 1. `Bot` タブへ移動
 2. `New Bot` をクリックする
-3. `Privileged Gateway Intents` にある Intent を全てチェックマークボタンから有効化する
+3. `Privileged Gateway Intents` にある必要な Intents を有効にします。
+
+Discord ではデータの機密性を守るため、いくつかの Intent を特権として定義しています。
+
+必要なものだけ有効にする必要があります。わからないうちは全て有効にしてください。
+
+- `PRESENCE INTENT`
+  - ギルドにおけるユーザーの **現在の状態**(アイコンなど) を取得する際は有効にしてください。
+  - 詳しくは [ドキュメント](https://discord.com/developers/docs/topics/gateway#presence-update) を参照
+- `SERVER MEMBERS INTENT`
+  - ギルドのメンバーを取得する際は有効にしてください。
+- `MESSAGE CONTENT INTENT`
+  - Developer Portal には注記されていませんが、 **メッセージの内容を受け取るためには必要な Intent です。**
+  - メッセージの内容を取得する際は有効にしてください。
 
 #### 3. トークンを保存する
 
