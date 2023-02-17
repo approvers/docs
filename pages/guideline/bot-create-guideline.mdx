@@ -132,6 +132,7 @@ client.login(process.env.DISCORD_TOKEN);
 
 ```py copy
 import discord
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -149,5 +150,5 @@ async def on_message(message):
 
     # ここにメッセージを受信したときの処理
 
-client.run('your token here')
+client.run(token=os.environ["DISCORD_TOKEN"])
 ```
