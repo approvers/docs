@@ -57,7 +57,7 @@ Discord ではクライアント上でも **この権限を付与する際は慎
 
 Discord ではデータの機密性を守るため、いくつかの Intent を特権として定義しています。
 
-必要なものだけ有効にする必要があります。わからないうちは全て有効にしてください。
+必要なものだけ有効にするのが一番ベストですが、わからないうちは全て有効にしてください。
 
 - `PRESENCE INTENT`
   - ギルドにおけるユーザーの **現在の状態**(アイコンなど) を取得する際は有効にしてください。
@@ -98,7 +98,7 @@ Discord ではデータの機密性を守るため、いくつかの Intent を�
 
 ここに書いてあるテンプレートを元に Bot を作成すれば上のルールを大体守れます。
 
-が、同然あなたも気をつける必要がある点が多少あります。
+ですが、当然あなたも気をつける必要がある点が多少あります。
 
 ### Node.js
 
@@ -132,6 +132,7 @@ client.login(process.env.DISCORD_TOKEN);
 
 ```py copy
 import discord
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -149,5 +150,5 @@ async def on_message(message):
 
     # ここにメッセージを受信したときの処理
 
-client.run('your token here')
+client.run(token=os.environ["DISCORD_TOKEN"])
 ```
