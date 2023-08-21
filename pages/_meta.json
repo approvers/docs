@@ -7,5 +7,9 @@
   "guideline": {
     "type": "page",
     "title": "ガイドライン"
+  },
+  "bot_reference": {
+    "type": "page",
+    "title": "Botリファレンス"
   }
 }
