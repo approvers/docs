@@ -1,0 +1,100 @@
+import { Callout } from "nextra-theme-docs";
+
+# Containers2
+
+限界開発鯖では Containers2 と呼ばれる共有サーバーが用意されています.
+
+旧 [approvers/containers](https://github.com/approvers/containers) の後継にあたるものになります.
+
+## 利用条件
+
+利用するには以下の条件を満たしておく必要があります.
+
+- 限界開発鯖(approvers) に対して GitHub Sponsors による支援を `$2` 以上行っていること. (限界税の納付)
+    - サーバーブーストによる支援は対象外になります.
+
+限界税(支援) に関する詳細は [approvers/genkai-tax の納付者向けドキュメント](https://tax.approvers.dev/) を参照してください.
+
+## 利用方法
+
+**1. [approvers/containers2](https://github.com/approvers/containers) をフォークする**
+
+<Callout type={"info"}>
+    限界開発鯖 Org のメンバーの場合はフォークする必要はありません.
+</Callout>
+
+**2. リポジトリをクローンする**
+
+```shell
+# approvers/containers2 をクローンする場合
+## HTTPS
+git clone https://github.com/approvers/containers2.git
+## SSH
+git clone git@github.com:approvers/containers2.git
+## GitHub CLI
+gh repo clone approvers/containers2
+
+# フォークしたリポジトリをクローンする場合
+## HTTPS
+git clone https://github.com/<ユーザーID>/containers2.git
+## SSH
+git clone git@github.com:<ユーザーID>/containers2.git
+## GitHub CLI
+gh repo clone <ユーザーID>/containers2
+```
+
+**3. プロジェクト名のディレクトリを作成する**
+
+デプロイするプロジェクト名のディレクトリを作成します.
+
+`OreOreBot2` の場合は以下のようになります.
+
+```shell
+mkdir oreorebot2
+```
+
+<Callout type={"info"}>
+    プロジェクト名は `lowercase + kabab` が理想です.
+</Callout>
+
+**4. ディレクトリ内に `compose.yml` を作成し, 編集する**
+
+`compose.yml` の詳しい書き方は Docker Documentation を参照してください.
+
+[Compose file - Docker Documentation](https://docs.docker.com/compose/compose-file/03-compose-file/)
+
+<Callout type="info">
+    最小構成の `compose.yml` は以下のようになります.
+
+    ```yaml
+    services:
+      app:
+        image: ghcr.io/approvers/containers2:latest
+        restart: always
+        env_file:
+          - .env
+    ```
+</Callout>
+
+**5. コミット・プッシュして PR を作成する**
+
+行った変更をコミット・プッシュして, `approvers/containers2` に対して PR を作成してください.
+
+### 環境変数やシークレットなどの機密内容を扱う場合
+
+秘密情報は PGP 鍵を用いて暗号化することで管理します．暗号化されたファイルは GitHub Actions にてデプロイ前に復号されます．
+
+1. `compose.yml` と同じディレクトリに参照するファイルを作成する．(例: `.env`)
+2. ファイルを編集して秘密情報を記述する．
+3. `compose.yml` で秘密情報を参照するように設定する．(例: `env_file: .env`)
+4. `<repository root>/encrypt.sh` を使ってファイルを暗号化する．(実行例: `./encrypt.sh .env`)
+5. `.env` が削除され， `.env.secret` が作成される．
+6. `.env.secret` をコミット & プッシュする．
+7. 場合に応じて， `.env.example` などを作成するといいでしょう．
+
+## 注意事項
+
+- マウント方式のボリュームを使用してこのリポジトリ内のファイルを参照することはできません．
+- 上記の運用はあくまで暫定ですので，今後変更される可能性があります．
+- 秘密情報は GitHub Actions で復号されるため，悪意ある Org メンバーによって秘密情報が盗まれる可能性があります．
+    - この問題に関しては今後の変更によって対処する予定です
