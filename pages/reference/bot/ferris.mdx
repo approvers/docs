@@ -1,0 +1,206 @@
+import { Callout } from "nextra-theme-docs";
+
+# ferris
+
+限界開発鯖で稼働しているDiscordBot.
+
+実際のところ かわえもんのRust実験場です.
+
+[リポジトリ: approvers/rusty-ponyo](https://github.com/approvers/rusty-ponyo)
+
+## 機能一覧
+
+ferris はキメラと呼ばれるBotになり, 複数Botの機能が統合され1つのBotとして提供されています.
+
+現在以下の機能が提供されています.
+
+- [限界alias](#限界alias)
+- [限界認証](#限界認証)
+- [限界ポイント](#限界ポイント)
+- [限界名言](#限界名言)
+- [VCDiff](#VCDiff)
+- GitHub Code Preview
+
+## 限界alias
+
+特定のメッセージが送信されたときに, 指定されたメッセージを同じ場所に送信する機能です.
+
+### コマンド一覧
+
+すべてのコマンドは `--help` オプションでヘルプを表示できます.
+
+#### `g!alias ranking`
+
+表示回数の多い順のランキングを表示します.
+
+#### `g!alias status`
+
+現在登録されているエイリアスの数を表示します.
+
+#### `g!alias delete <KEY>`
+
+指定したキーのエイリアスを削除します.
+
+- `KEY`: エイリアスのキー
+
+#### `g!alias make [OPTION] <KEY> [MESSAGE]`
+
+エイリアスを作成します.
+
+- `KEY`: エイリアスのキー
+- `MESSAGE`: エイリアスのメッセージ. 添付ファイルなども登録可能です.
+- `OPTION`: オプション
+  - `-f` `--force`: 既存のエイリアスを上書きします.
+
+<Callout type={"warning"}>
+    既に登録されたキーに対して新しいエイリアスは登録できません.
+
+    既存のエイリアスを上書きする場合は, `-f` オプションを指定してください.
+</Callout>
+
+-----
+
+- 登録できるエイリアスの最大文字数は500文字までです.
+- エイリアスに使用できる添付ファイルのサイズは決められており, それを超えた場合は自動的に圧縮されます.
+
+## 限界認証
+
+限界認証情報の設定管理.
+
+### コマンド一覧
+
+すべてのコマンドは `--help` オプションでヘルプを表示できます.
+
+#### `g!auth set pgp <SRC_URL>`
+
+PGP公開鍵を設定します.
+
+- `SRC_URL`: PGP公開鍵のURL
+
+#### `g!auth token`
+
+トークンを作成してDMに送信します.
+
+#### `g!auth revoke`
+
+トークンを無効化します.
+
+## 限界ポイント
+
+VCに入っている時間帯から, そのユーザーの限界さを計算しポイント化します.
+
+### コマンド一覧
+
+#### `g!point show [USER_ID]`
+
+指定したユーザーのポイントを表示します.
+
+- `USER_ID`: ユーザーID. 表示しない場合は自分のポイントを表示します.
+
+#### `g!point ranking [N]`
+
+トップN人のVC時間の伸びをグラフにプロットします.
+
+- `N`: トップN人. 省略時は5人.
+
+#### `g!point ranking [OPTIONS] [BY]`
+
+ランキングを表示します.
+
+- `BY`: 表示するランキングのタイプ.
+    - `duration`: 接続VC時間
+    - `point`: 限界ポイント
+    - `growth`: 限界効率
+- `OPTIONS`: オプション
+  - `-n` `--invert`: ランキングを反転させます.
+
+### 限界ポイントの計算式
+
+限界ポイントの計算式は[`v2023.8.7`](https://github.com/approvers/rusty-ponyo/releases/tag/v2023.8.7)以降 Formula v1, v2 で区別されています.
+
+デフォルトで使用されるのは Formula v2 です.
+
+#### 表示の切り替え
+
+`g!point` のすべてのコマンドに `-f` `--formula` オプションを指定することで Formula バージョンを切り替えることが可能です.
+
+- `-f v1` `--formula v1`: Formula v1 を使用します.
+- `-f v2` `--formula v2`: Formula v2 を使用します.
+
+なお, 指定しない場合はデフォルトの v2 が使用されます.
+
+## 限界名言
+
+限界鯖民の名言を管理します.
+
+### コマンド一覧
+
+すべてのコマンドは `--help` オプションでヘルプを表示できます.
+
+#### `g!meigen make <AUTHOR> <CONTENT>`
+
+名言を新規登録します.
+
+- `AUTHOR`: 名言の発言者
+- `CONTENT`: 名言の内容
+
+#### `g!meigen show [OPTIONS] <ID>`
+
+指定されたIDの名言を表示します.
+
+- `ID`: 名言のID
+- `OPTIONS`: オプション
+  - `--gopher`: Go言語のマスコットキャラクター [Gopher](https://go.dev/blog/gopher) のASCIIアートで名言を表示します.
+
+#### `g!meigen status`
+
+現在登録されている名言の数を表示します.
+
+#### `g!meigen list [OPTIONS]`
+
+名言をリスト表示にします.
+
+- `OPTIONS`: オプション
+  - `--offset <OFFSET>`: 表示する名言のオフセット. 省略時は `0` .
+  - `--limit <LIMIT>`: 表示する名言の数. 省略時は `5` .
+  - `-r` `--random`: 指定された場合, 検索条件に合致する名言の中からランダムに選出し表示します.
+  - `--author <AUTHOR>`: 指定した人の名言を表示します.
+  - `--content <CONTENT>`: 指定した文字列を含む名言をリスト表示します.
+
+<Callout type="info">
+    `--limit` オプション使用時指定する文字列が長い場合は, 表示数が少なくなります.
+</Callout>
+
+#### `g!meigen delete`
+
+名言を削除します.
+
+<Callout type="warning">
+    このコマンドは **かわえもん** のみ使用できます.
+</Callout>
+
+#### `g!meigen love <ID>`
+
+指定したIDの名言をいいねします.
+
+いいねされた名言は `g!meigen show` や `g!meigen list` での表示時に `❤️` が表示されます.
+
+#### `g!meigen unlove <ID>`
+
+指定したIDの名言のいいねを取り消します.
+
+### VCDiff
+
+VC の入退出を通知します. はらちょが何らかの理由で使用できない場合の代替え機能です.
+
+- `g!vcdiff <enable/disable>`
+
+<Callout type="warning">
+    この機能はあくまで簡易的に用意されているため普段使いに適してはいません.
+
+    通常は無効にしておくべきです.
+</Callout>
+
+### GitHub Code Preview
+
+GitHub の Permalink を送信すると, そのコードをプレビューします.
