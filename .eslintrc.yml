@@ -7,14 +7,8 @@ extends:
   - plugin:mdx/recommended
 plugins:
   - '@typescript-eslint'
-  - 'simple-import-sort'
-  - 'import'
 rules:
-  'simple-import-sort/imports': 'error'
-  'simple-import-sort/exports': 'error'
   'max-params': 'error'
-  'import/first': 'error'
-  'import/no-duplicates': 'error'
-  'import/order': [2, { 'alphabetize': { 'order': 'asc' } }]
 settings:
   'mdx/code-blocks': true
+root: true
