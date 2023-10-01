@@ -9,7 +9,7 @@ const URL = 'https://github.com/approvers/docs';
  */
 export default {
   logo: <span>approvers/docs</span>,
-  docsRepositoryBase: `${URL}/pages`,
+  docsRepositoryBase: `${URL}/edit/main/pages/index.mdx`,
   project: {
     link: URL
   },
