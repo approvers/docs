@@ -9,7 +9,8 @@
     "start": "next start",
     "export": "next export",
     "lint": "next lint",
-    "format": "prettier --ignore-path .gitignore -w **/*.{js,ts,tsx,md,mdx}"
+    "format": "prettier --ignore-path .gitignore -w **/*.{js,ts,tsx,md,mdx}",
+    "check": "prettier --check --ignore-path .gitignore -w **/*.{js,ts,tsx,md,mdx}"
   },
   "dependencies": {
     "next": "13.5.2",
