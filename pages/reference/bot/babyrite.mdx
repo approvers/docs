@@ -1,0 +1,43 @@
+import { Callout } from "nextra-theme-docs";
+
+# babyrite
+
+メッセージリンクのメッセージ内容を展開する Discord Bot.
+
+[リポジトリ: m1sk9/babyrite](https://github.com/m1sk9/babyrite)
+
+## 使い方
+
+### メッセージを引用する
+
+メッセージリンクをチャンネルに送信すると babyrite はメッセージを取得・展開します.
+
+<Callout type={"info"}>
+    babyrite が引用できるのは以下のメッセージです.
+
+    - babyrite がアクセスできるチャンネルのメッセージ
+    - NSFW設定がOFFのチャンネルのメッセージ
+    - 埋め込みが含まれたメッセージ
+</Callout>
+
+<Callout type={"warning"}>
+    荒らしを防止するため babyrite は最初のメッセージリンク **のみ** を引用します.
+</Callout>
+
+### メッセージの引用をスキップする
+
+babyrite は基本すべてのメッセージを引用します. 引用したくないメッセージがある場合は `<>` で囲ってください.
+
+```
+<https://discord.com/channels/683939861539192860/683939861539192863/683941506561998848>
+```
+
+## チャンネルのキャッシュ
+
+<Callout type={"info"}>
+    チャンネルのキャッシュは [v0.3.0](https://github.com/m1sk9/babyrite/releases/tag/v0.3.0) ([v0.3.1](https://github.com/m1sk9/babyrite/releases/tag/v0.3.1)) 以降で利用できます.
+</Callout>
+
+babyrite は引用したメッセージのチャンネルをキャッシュとして保存し, 再度そのチャンネルのメッセージに対して引用リクエストがあった場合はキャッシュのチャンネル情報を使用しメッセージを取得します.
+
+チャンネルのキャッシュが存在しない場合は Discord API を使用して取得します. ( v0.2.1 以前の方法) その場合は引用に時間がかかる場合があります.
