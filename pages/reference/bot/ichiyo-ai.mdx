@@ -47,13 +47,66 @@ static SYSTEM_CONTEXT: &str = "回答時は以下のルールに従うこと.\n-
 
 使用されるモデルは [限界税](https://github.com/approvers/genkai-tax) 納付の有無で変わります.
 
-- **納税者:** GPT-4
-- **非納税者:** GPT-3.5
+- **納税者:** GPT-4 Turbo (gpt-4-1106-preview)
+- **非納税者:** GPT-3.5 Turbo (gpt-3.5-turbo-1106)
 
-非納税者が GPT-4 のメッセージに対して返信モードを使用してもそれらのコンテキストを GPT-3.5 に送信します. 逆も然りです.
+非納税者が GPT-4 Turbo のメッセージに対して返信モードを使用してもそれらのコンテキストを GPT-3.5 に送信します. 逆も然りです.
+
+<Callout>
+    ichiyoAI v1.16.0 より, GPT-4 Turbo (gpt-4-1106-preview) / GPT-3.5 Turbo (gpt-3.5-turbo-1106) を早期サポートしています.
+    主な変更内容は以下のとおりです.
+
+    - **命令追従性の向上**: ユーザーが行った命令をより忠実に追従するようになりました.
+    - **最大トークン数の増加**: 出力できる最大トークン数が 2048 トークンから 4096 トークンに増加しました. (GPT-4 Turbo のみ)
+    - **トレーニングデータの更新**: トレーニングデータが 2023年4月 に更新されました. (GPT-4 Turbo のみ)
+
+    詳しくは OpenAI DevDay 2023 の公式記事を参照してください.
+
+    [New models and developer products announced at DevDay - OpenAI Blog][Dev-Day]
+</Callout>
+
+<Callout type={"warning"}>
+    `gpt-4-1106-preview` はプレビュー・モデルのため, 正常に動作しなかったり生成結果が不正確になる可能性があります.
+    ichiyoAI v1.16.0 以降, 納税者のリクエストはすべて `gpt-4-1106-preview` に送信されますが, 状況によっては変更がロールバックされる場合があります. ご了承ください.
+</Callout>
+
+### サポートモデル
+
+モデルの詳細については OpenAI API Documentation を参照してください.
+
+[Models - OpenAI API Documentation](https://platform.openai.com/docs/models)
+
+#### GPT-4
+
+GPT-3.5 を改良し, 自然言語やコードを理解・生成できる言語モデル. GPT-3.5 の **完全上位互換** .
+
+| モデル名 | ichiyoAI の対応バージョン | Context Window | トレーニングデータ | Input | Output |
+| --- | --- | --- | --- | --- | --- |
+| `gpt-4-1106-preview` | `v1.16.0` 〜 | 128,000 Token | Apr 2023 | $0.01 / 1k | $0.03 / 1k |
+| `gpt-4-vision-preview` | 未対応 | 128,000 Token | Apr 2023 | $0.01 / 1k | $0.03 / 1k |
+| `gpt-4` (Current: `gpt-4-0613`) | `v1.5.0` 〜 `v1.15.4` | 8.192 Token | Sep 2021 | $0.03 / 1k | $0.06 / 1k |
+| `gpt-4-32k` | 未対応 | 32,768 Token | Sep 2021 | $0.03 / 1k | $0.06 / 1k |
+
+#### GPT-3.5
+
+GPT-3 を改良し, 自然言語やコードを理解・生成できる言語モデル.
+
+| モデル名 | ichiyoAI の対応バージョン | Context Window | トレーニングデータ | Input | Output |
+| --- | --- | --- | --- | --- | --- |
+| `gpt-3.5-turbo-1106` | `v1.16.0` 〜 | 16,385 Token | Sep 2021 | $0.0010 / 1k | $0.0020 / 1k |
+| `gpt-3.5-turbo` (Current: `gpt-3.5-turbo-0613`) | 〜 `v1.15.4` | 4,096 Token | Sep 2021 | $0.0015 / 1k | $0.002 / 1k |
+
+<Callout type={"warning"}>
+    `gpt-3.5-turbo` ( `gpt-4` ) は 継続的なモデルアップグレードに対応しています.
+    そのため, ichiyoAI のアップデート問わず自動的に新しいモデルに切り替わっています. 詳しくは OpenAI API Documentation を参照してください.
+
+    [Continuous model upgrades - OpenAI API Documentation](https://platform.openai.com/docs/models/continuous-model-upgrades)
+</Callout>
 
 ## 注意事項
 
 - OpenAI API 側からのレスポンスの文字数が 2000 文字を超えた場合, Discord API の仕様上 ichiyoAI は返信せずに終了します.
 - 現時点で、 OpenAI は API 経由での利用についてモデルのトレーニングには使用しないと明言していますが、機密情報等を送信することは避けてください。(ichiyoAI 側で会話のログ等は一切収集していませんが、一度 Discord API を経由しているため危険ではあります。)
 - OpenAI API へリクエストを送ってから3分以上かかった場合は tokio により自動的にタイムアウトになります。もう一度送るか、内容を見直してみてください。
+
+[Dev-Day]: https://openai.com/blog/new-models-and-developer-products-announced-at-devday
